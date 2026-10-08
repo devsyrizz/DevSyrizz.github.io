@@ -1,0 +1,100 @@
+/* Custom Viewport Setup */
+:root {
+  --terminal-bg: #282828;
+  --terminal-border: #3c3836;
+}
+
+html {
+  font-size: 15px;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 4rem;
+}
+
+main > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  scroll-margin-top: 4rem;
+}
+
+/* Real Terminal Input Overlay targeting Android IME & Gboard Fix */
+.terminal-real-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.01;
+  color: transparent;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  z-index: 10;
+  caret-color: transparent;
+}
+
+/* Custom Terminal Scrollbar */
+.foot-terminal-body::-webkit-scrollbar {
+  width: 5px;
+}
+.foot-terminal-body::-webkit-scrollbar-track {
+  background: #1d2021;
+}
+.foot-terminal-body::-webkit-scrollbar-thumb {
+  background: #504945;
+  border-radius: 3px;
+}
+.foot-terminal-body::-webkit-scrollbar-thumb:hover {
+  background: #00e5ff;
+}
+
+/* Terminal Blinking Cursor */
+.foot-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background-color: #00e5ff;
+  vertical-align: sub;
+  animation: foot-blink 1s steps(2, start) infinite;
+}
+
+@keyframes foot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Dynamic Preloader & Modal Animations */
+#terminal-preloader.loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#project-modal, #cv-modal {
+  transition: opacity 0.25s ease-in-out;
+}
+
+/* Print Overrides for CV Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print, #terminal-preloader, #offline-banner, #project-modal, #cv-modal {
+    display: none !important;
+  }
+  .shadow-2xl, .shadow-lg, .shadow-md, .shadow-sm {
+    box-shadow: none !important;
+  }
+  .border-gruvbox-border, .border-slate-200, .border-slate-800 {
+    border-color: #cccccc !important;
+  }
+}
